@@ -34,34 +34,65 @@ function playRound(playerSelection, computerSelection = computerPlay()) {
     }
 }
 
-function game() {
+const container = document.querySelector('#container')
+const buttons = document.querySelectorAll('.choice')
 
-    let playerSelection;
-    let computerSelection;
-    let result;
-    let playerScore = 0;
-    let computerScore = 0;
+buttons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        const message = document.createElement('p')
+        message.textContent = playRound(e.target.id)
+        message.style.textAlign = "center"
 
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("Choose: ");
-        computerSelection = computerPlay();
-        try {
-            result = playRound(playerSelection, computerSelection);
-            if (result.slice(0, 5) === "You L") {
-                computerScore++;
-            } else if (result.slice(0, 5) === "You W") {
-                playerScore++;
+        if (message.textContent.slice(0, 5) === "You L") {
+            message.style.color = "#EE6C4D"
+            message.style.fontSize = "28px"
+            const computer = document.querySelector('#computerScore')
+            let score = computer.textContent
+            computer.textContent = parseInt(score) + 1
+            if (parseInt(computer.textContent) === 5) {
+                const overlay = document.querySelector('.overlay')
+                overlay.classList.toggle('overlayActive')
+                const popup = document.querySelector('.popup')
+                popup.classList.toggle('active')
+                const result = document.querySelector('#result')
+                result.textContent = "You lost the computer wins :( Better try Again"
+                const replay = document.querySelector('#replay')
+                replay.addEventListener('click', () => {
+                    window.location.reload() 
+                })
             }
-        } catch (error) {
-            console.error("You fucked up")
+        } else if (message.textContent.slice(0, 5) === "You W") {
+            message.style.color = "#2a9d8f"
+            message.style.fontSize = "28px"
+            const player = document.querySelector('#playerScore')
+            let score = player.textContent
+            player.textContent = parseInt(score) + 1
+            if (parseInt(player.textContent) === 5) {
+                const overlay = document.querySelector('.overlay')
+                overlay.classList.toggle('overlayActive')
+                const popup = document.querySelector('.popup')
+                popup.classList.toggle('active')
+                const result = document.querySelector('#result')
+                result.textContent = "Congratulations, you won!"
+                const replay = document.querySelector('#replay')
+                replay.addEventListener('click', () => {
+                    window.location.reload()
+                })
+            }
         }
-        console.log(result)
-    }
-    if (playerScore < computerScore) {
-        console.log("You lost!");
-    } else if (playerScore > computerScore) {
-        console.log("You won!");
-    } else {
-        console.log("It's a tie!")
-    }
-}
+        else {
+            message.style.color = "#3D5A80"
+            message.style.fontSize = "28px"
+        }
+
+        container.appendChild(message)
+        setTimeout(() => {
+            container.removeChild(message)
+        }, 1000)
+    })
+})
+
+const reset = document.querySelector('#reset')
+reset.addEventListener('click', () => {
+    window.location.reload()
+})

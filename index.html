@@ -1,9 +1,57 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Rock Paper Scissors</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="scripts/main.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <title>RPS</title>
   </head>
-  <body style="background-color: beige">
-    <script src="scripts/main.js"></script>
+
+  <body>
+    <header>
+      <h1>ROCK PAPER SCISSORS</h1>
+    </header>
+    <div id="container">
+      <div id="score">
+        <div>
+          <span class="score" id="player">Player Score: </span>
+          <span id="playerScore">0</span>
+        </div>
+        <!-- <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </span> -->
+        <div>
+          <span class="score" id="computer">Computer Score: </span>
+          <span id="computerScore">0</span>
+        </div>
+      </div>
+
+      <div id="choices">
+        <img
+          src="images/handPaper.png"
+          class="choice"
+          id="paper"
+          value="paper"
+        />
+        <img src="images/handRock.png" class="choice" id="rock" value="rock" />
+        <img
+          src="images/handScissors.png"
+          class="choice"
+          id="scissors"
+          value="scissors"
+        />
+      </div>
+
+      <div id="reset"><button value="reset">Reset</button></div>
+      <div class="popup">
+        <p id="result"></p>
+        <button id="replay">Click to start again</button>
+      </div>
+      <div class="overlay"></div>
+    </div>
   </body>
 </html>
